@@ -43,6 +43,7 @@ public class KawiBawiBo {
         }
 
         // TODO: determine who win using if/else
+        // student test
 
         // output will be one of :
         System.out.println("Alice win!");
