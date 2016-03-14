@@ -1,11 +1,8 @@
-package basic;
+package com.company;
 
 import java.util.Scanner;
 
-/**
- * Created by jyheo on 2016-03-10.
- */
-public class KawiBawiBo {
+public class Main {
     public static boolean isKawiBawiBoSwitch(String str) {
         switch (str) {
             case "가위":
@@ -43,10 +40,34 @@ public class KawiBawiBo {
         }
 
         // TODO: determine who win using if/else
+        if(bob.equals("가위")) {
+            if (alice.equals("가위")) {
+                System.out.println("Tie!");
+            } else if (alice.equals("바위")) {
+                System.out.println("Alice win!");
+            } else if (alice.equals("보")) {
+                System.out.println("Bob win!");
+            }
+        }
+        else if(bob.equals("바위")) {
+            if (alice.equals("가위")) {
+                System.out.println("Bob win!");
+            } else if (alice.equals("바위")) {
+                System.out.println("Tie!");
+            } else if (alice.equals("보")) {
+                System.out.println("Alice win!");
+            }
+        }
+        else if(bob.equals("보")) {
+            if (alice.equals("가위")) {
+                System.out.println("Alice win!");
+            } else if (alice.equals("바위")) {
+                System.out.println("Bob win!");
+            } else if (alice.equals("보")) {
+                System.out.println("Tie!");
+            }
+        }
 
-        // output will be one of :
-        System.out.println("Alice win!");
-        System.out.println("Bob win!");
-        System.out.println("Tie!");
+
     }
 }
