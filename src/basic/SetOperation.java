@@ -1,17 +1,45 @@
-package basic;
+package com.company;
 
-/**
- * Created by jyheo on 2016-03-22.
- */
-public class SetOperation {
+public class Main {
+
     public static int[] union(int[] A, int[] B) {
-        // TODO: return union of set A and B
-        return new int[0];
+        int C[] = new int[(A.length + B.length) - intersection(A, B).length];
+
+        for(int i=0;i<A.length;i++){
+            if(A[i]!=B[i]) {
+                C[i] = A[i];
+            }
+            for(int j=A.length;j<C.length;j++) {
+                if(A[i]!=B[j-A.length+intersection(A,B).length]){
+                    C[j] = B[j-A.length+intersection(A,B).length];
+                }
+            }
+        }
+
+        return C;
     }
 
     public static int[] intersection(int[] A, int[] B) {
-        // TODO: return intersection of set A and B
-        return new int[0];
+
+        int index=0;
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < B.length; j++) {
+                if(A[i]==B[j])
+                    index++;
+            }
+        }
+        int result[] = new int[index];
+        index = 0;
+
+        for(int i=0;i<A.length;i++){
+            for(int j=0;j<B.length;j++){
+                if(A[i]==B[j]){
+                    result[index]=A[i];
+                    index++;
+                }
+            }
+        }
+        return result;
     }
 
     public static void print_array(int[] A) {
@@ -28,11 +56,10 @@ public class SetOperation {
         print_array(C);
 
         int[] D = union(A, B);
+
         print_array(D);
     }
-
-    /* execution result
-        3 5
-        1 2 3 4 5 7 8 9
-    */
 }
+
+
+ 
