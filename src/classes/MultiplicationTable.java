@@ -1,9 +1,6 @@
-package classes;
+package com.company;
 
-/**
- * Created by jyheo on 2016-03-26.
- */
-public class MultiplicationTable {
+public class Main {
     private int number;
     private int max_number = 9;
 
@@ -16,7 +13,9 @@ public class MultiplicationTable {
         }
     }
 
-    int getNumber() { return number; }
+    int getNumber() {
+        return number;
+    }
 
     boolean setMaxNumber(int max_num) {
         if (9 <= max_num && max_num <= 19) {
@@ -27,7 +26,9 @@ public class MultiplicationTable {
         }
     }
 
-    int getMaxNumber() { return max_number; }
+    int getMaxNumber() {
+        return max_number;
+    }
 
     void printTable() {
         for (int i = 2; i <= max_number; i++) {
@@ -36,12 +37,15 @@ public class MultiplicationTable {
     }
 
     public static void main(String[] args) {
-        MultiplicationTable mtable = new MultiplicationTable();
+        Main mtable = new Main();
 
-        mtable.max_number = 19; // BAD practice!
-        mtable.setMaxNumber(19);
+        mtable.max_number = 9; // BAD practice!
+        mtable.setMaxNumber(9);
+        for (int i = 2; i <= mtable.max_number;i++,System.out.println("--------------------"+(i-1)+"단 입니다.")) {
+            mtable.setNumber(i);
+            mtable.printTable();
 
-        mtable.setNumber(4);
-        mtable.printTable();
+        }
+
     }
 }
