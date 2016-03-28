@@ -1,9 +1,9 @@
-package classes;
+import java.util.Scanner;
 
 /**
- * Created by jyheo on 2016-03-26.
+ * Created by b10534 on 2016-03-15.
  */
-public class MultiplicationTable {
+public class jal {
     private int number;
     private int max_number = 9;
 
@@ -30,18 +30,22 @@ public class MultiplicationTable {
     int getMaxNumber() { return max_number; }
 
     void printTable() {
-        for (int i = 2; i <= max_number; i++) {
+        for (int i = 1; i <= max_number; i++) {
             System.out.println(number + "x" + i + "=" + number * i);
         }
     }
 
     public static void main(String[] args) {
-        MultiplicationTable mtable = new MultiplicationTable();
+        jal mtable = new jal();
+        int i;
 
-        mtable.max_number = 19; // BAD practice!
-        mtable.setMaxNumber(19);
+        mtable.max_number = 9; // BAD practice!
+        mtable.setMaxNumber(9);
 
-        mtable.setNumber(4);
-        mtable.printTable();
+        for(i=2;i<10;i++){
+            mtable.setNumber(i);
+            mtable.printTable();
+        }
+
     }
 }
