@@ -1,10 +1,7 @@
 package classes;
 
-/**
- * Created by jyheo on 2016-03-26.
- */
-public class MultiplicationTable {
-    private int number;
+public class Temp {
+    private int number; //
     private int max_number = 9;
 
     boolean setNumber(int num) {
@@ -16,7 +13,9 @@ public class MultiplicationTable {
         }
     }
 
-    int getNumber() { return number; }
+    int getNumber() {
+        return number;
+    }
 
     boolean setMaxNumber(int max_num) {
         if (9 <= max_num && max_num <= 19) {
@@ -27,7 +26,9 @@ public class MultiplicationTable {
         }
     }
 
-    int getMaxNumber() { return max_number; }
+    int getMaxNumber() {
+        return max_number;
+    }
 
     void printTable() {
         for (int i = 2; i <= max_number; i++) {
@@ -35,13 +36,17 @@ public class MultiplicationTable {
         }
     }
 
-    public static void main(String[] args) {
-        MultiplicationTable mtable = new MultiplicationTable();
+    public static void main(String[] args)//class 의 정의 만으로 static에서 사용가능
+    {
 
-        mtable.max_number = 19; // BAD practice!
-        mtable.setMaxNumber(19);
+        int i;
+        Temp mtable = new Temp();
 
-        mtable.setNumber(4);
-        mtable.printTable();
+        mtable.setMaxNumber(9);
+
+        for (i = 2; i < 10; i++) {
+            mtable.setNumber(i);
+            mtable.printTable();
+        }
     }
 }
