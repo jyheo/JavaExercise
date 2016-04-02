@@ -1,18 +1,17 @@
-package basic;
-
 import java.util.Scanner;
-
-public class Sum {
+public class babo{
     public static void main(String[] args) {
-        float fSum = 0;
+        Scanner number = new Scanner(System.in);
+        double sum = 0;
+        while(number.hasNext()){
+            int num = number.nextInt();
+            if(num == -1)
+                break;
+            else
+                sum += num;
+        }
+        System.out.println("숫자들의 합 :" + sum);
 
-        Scanner scanner = new Scanner(System.in);
-        fSum = scanner.nextFloat();
-        fSum += scanner.nextFloat();
-        fSum += scanner.nextFloat();
-        fSum += scanner.nextFloat();
-        fSum += scanner.nextFloat();
-
-        System.out.println(fSum / 5);
     }
+
 }
