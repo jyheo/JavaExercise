@@ -1,19 +1,22 @@
-package basic;
-
 import java.util.Scanner;
 
-public class Sum2 {
-    public static void main(String[] args) {
-        float fSum = 0;
-        int iNum = 0;
+/**
+ * Created by SAM on 2016-04-02.
+ */
+public class sum {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int sum=0;
+        int i=0;
 
-        Scanner scanner = new Scanner(System.in);
-
-        while (scanner.hasNextInt()) {
-            fSum += scanner.nextFloat();
-            iNum++;
+        while(sc.hasNext()){
+            int a=sc.nextInt();
+            sum+=a;
+            i++;
         }
+        System.out.println(i);
 
-        System.out.println(fSum / iNum);
+        System.out.println("평균: "+(double)sum/i);
     }
+
 }
