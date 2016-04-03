@@ -4,20 +4,16 @@ import java.util.Scanner;
 
 public class Reverse {
     public static void main(String[] args) {
-        String[] strArr = new String[5];
-        Scanner scanner = new Scanner(System.in);
-        int i;
+         String[] iArray = new String[4];
 
-        for (i = 0; i < strArr.length; i++) {
-            strArr[i] = scanner.next();
-        }
-        for (i = strArr.length - 1; i >= 0; i--) {
-            System.out.print(strArr[i] + " ");
-        }
-        System.out.println();
+    Scanner a = new Scanner(System.in);
+
+    for (int i = 0; i < iArray.length; i++) {
+        iArray[i] = a.next();
+    }
+    for (int i = iArray.length-1; i >=0 ; i--) {
+        System.out.println( iArray[i] );
+    }
     }
 }
-/* running result
-감 호박 수박 사과 배
-배 사과 수박 호박 감 
-*/
+
