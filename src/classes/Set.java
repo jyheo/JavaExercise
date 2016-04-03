@@ -1,5 +1,6 @@
-package classes;
-
+/**
+ * Created by 철순 on 2016-03-25.
+ */
 /**
  * 1. Array of Objects
  * 2. this reference
@@ -21,16 +22,21 @@ public class Set {
     public Set(int[] initial_set) {
         this();
         extendArray(initial_set.length);
-        System.arraycopy(initial_set, 0, array, 0, initial_set.length);
+        addElement(initial_set);
         this.size = initial_set.length;
     }
 
     public Set(Set s) {
         this();
         extendArray(s.size);
-        System.arraycopy(s.array, 0, this.array, 0, s.size);
-        // TODO: add arraycopy method in class Set, and replace System.arraycopy with the arraycopy of Set.
+        arraycopy(s.array);
         this.size = s.size;
+    }
+
+    private void arraycopy(int [] source){
+        int max = source.length;
+        for(int i=0; i<max; i++)
+            this.array[i] = source[i];
     }
 
     private void extendArray(int added_length) {
@@ -91,8 +97,15 @@ public class Set {
     }
 
     public static Set intersection(Set A, Set B) {
-        // TODO: implement static intersection()
-        return new Set();
+        Set X = new Set();
+        for(int i = 0; i<A.array.length; i++){
+            for(int j=0; j<B.array.length; j++){
+                if(A.array[i] == B.array[j])
+                    if(A.array[i]!=0)
+                        X.addElement((A.array[i]));
+            }
+        }
+        return X;
     }
 
     public static void main(String[] args) {
@@ -112,3 +125,4 @@ public class Set {
         X.print();
     }
 }
+
