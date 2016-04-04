@@ -36,6 +36,13 @@ class Fish {
             y = 0;
     }
 
+    public void move1(int width, int height){
+        x++;
+        y++;
+    }
+
+
+
     public void display(int x, int y) {
         if (this.x == x && this.y == y) {
             System.out.print(shape);
@@ -43,36 +50,50 @@ class Fish {
     }
 }
 
+
 public class Lake {
     private int width;
     private int height;
-    private Fish fish;
-    private Fish fish2;
+    private Fish fish[]=new Fish[5];
+    private Fish fish2[]=new Fish[5];
 
     public Lake(int width, int height) {
         this.width = width;
         this.height = height;
-        fish = new Fish();
-        fish2 = new Fish("p", "<***<");
+        for(int i=0;i<5;i++) {
+            fish[i] = new Fish();
+            fish2[i] = new Fish("p", "<***<");
+        }
     }
 
     public void moveFish() {
-        fish.move(width, height);
-        fish2.move(width, height);
+
+        for(int i=0;i<5;i+=2) {
+            fish[i].move(width, height);
+            fish2[i].move(width, height);
+        }
+        for(int i=1;i<5;i+=2) {
+            fish[i].move1(width, height);
+            fish2[i].move1(width, height);
+        }
     }
+
+
 
     public void display() {
         for (int i = 0; i < width; i++)
             System.out.print("-");
         System.out.println();
-        for (int i = 0; i < height; i++) {
-            System.out.print("|");
-            for (int j = 0; j < width; j++) {
-                fish.display(j, i);
-                fish2.display(j, i);
-                System.out.print(" ");
+        for(int a=0; a<5; a++) {
+            for (int i = 0; i < height; i++) {
+                System.out.print("|");
+                for (int j = 0; j < width; j++) {
+                    fish[a].display(j, i);
+                    fish2[a].display(j, i);
+                    System.out.print(" ");
+                }
+                System.out.println("|");
             }
-            System.out.println("|");
         }
         for (int i = 0; i < width; i++)
             System.out.print("-");
@@ -80,7 +101,7 @@ public class Lake {
     }
 
     public static void main(String args[]) {
-        Lake lake = new Lake(80, 20);
+        Lake lake = new Lake(80, 3);
         Scanner scanner = new Scanner(System.in);
         while (true) {
             lake.moveFish();
