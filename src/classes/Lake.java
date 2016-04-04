@@ -26,10 +26,18 @@ class Fish {
 
     public void move(int width, int height) {
         double rand = Math.random();
-        if (rand < 0.5)
-            x++;
-        else
-            y++;
+        this.x = (int)(rand*80);
+        this.y = (int)(rand*20);
+
+        if (x >= width)
+            x = 0;
+        if (y >= height)
+            y = 0;
+    }
+    public void move2(int width,int height){
+        x++;
+        y++;
+
         if (x >= width)
             x = 0;
         if (y >= height)
@@ -41,24 +49,39 @@ class Fish {
             System.out.print(shape);
         }
     }
+
+    public void setShape(String shape) {
+        this.shape = shape;
+    }
 }
 
 public class Lake {
     private int width;
     private int height;
-    private Fish fish;
-    private Fish fish2;
+    private Fish fish[] = new Fish[10];
+    private Scanner scanner;
 
     public Lake(int width, int height) {
         this.width = width;
         this.height = height;
-        fish = new Fish();
-        fish2 = new Fish("p", "<***<");
+        scanner = new Scanner(System.in);
+        for(int i=0;i<fish.length;i++){
+            fish[i] = new Fish();
+            fish[i].setShape(scanner.next());
+        }
+
     }
 
     public void moveFish() {
-        fish.move(width, height);
-        fish2.move(width, height);
+        for(int i=0;i<fish.length;i++){
+            if(i%2==1){
+                fish[i].move(width,height);
+            }
+            else{
+                fish[i].move2(width,height);
+            }
+
+        }
     }
 
     public void display() {
@@ -68,15 +91,17 @@ public class Lake {
         for (int i = 0; i < height; i++) {
             System.out.print("|");
             for (int j = 0; j < width; j++) {
-                fish.display(j, i);
-                fish2.display(j, i);
+                for(int k=0;k<fish.length;k++){
+                    fish[k].display(j,i);
+                }
                 System.out.print(" ");
             }
             System.out.println("|");
         }
-        for (int i = 0; i < width; i++)
+        for (int i = 0; i < width; i++) {
+
             System.out.print("-");
-        System.out.println();
+        }
     }
 
     public static void main(String args[]) {
