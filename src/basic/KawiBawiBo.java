@@ -1,11 +1,9 @@
-package basic;
-
 import java.util.Scanner;
 
 /**
  * Created by jyheo on 2016-03-10.
  */
-public class KawiBawiBo {
+public class jh {
     public static boolean isKawiBawiBoSwitch(String str) {
         switch (str) {
             case "가위":
@@ -41,12 +39,39 @@ public class KawiBawiBo {
             System.out.println("Input allowed only : 가위, 바위, 보");
             return;
         }
+        if(bob.equals("가위")){
+            if(alice.equals("보"))
+                System.out.println("Bob win!");
+            else if(alice.equals("가위"))
+                System.out.println("Tie!");
+            else
+                System.out.println("Alice win!");
 
-        // TODO: determine who win using if/else
+        }
+        else if("bob"=="바위"){
+            if("alice"=="보")
+                System.out.println("Alice win!");
+            else if("alice"=="가위")
+                System.out.println("Bob win!");
+            else
+                System.out.println("Tie!");
+        }
 
-        // output will be one of :
+        else{
+            if("alice"=="보")
+                System.out.println("Tie!");
+            else if("alice"=="가위")
+                System.out.println("Alice win!");
+            else
+                System.out.println("Bob win!");
+
+        }
+
+
+
         System.out.println("Alice win!");
         System.out.println("Bob win!");
         System.out.println("Tie!");
     }
 }
+
