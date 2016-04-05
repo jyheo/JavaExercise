@@ -1,18 +1,20 @@
-package basic;
-
 import java.util.Scanner;
 
-public class Sum {
-    public static void main(String[] args) {
-        float fSum = 0;
+/**
+ * Created by SAM on 2016-04-02.
+ */
+public class sum {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
-        fSum = scanner.nextFloat();
-        fSum += scanner.nextFloat();
-        fSum += scanner.nextFloat();
-        fSum += scanner.nextFloat();
-        fSum += scanner.nextFloat();
+        float a =0;
 
-        System.out.println(fSum / 5);
+        for(int i=0;i<5;i++){
+            a+=sc.nextFloat();
+        }
+
+        System.out.println("평균: "+a/5);
+
     }
+
 }
