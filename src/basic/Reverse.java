@@ -1,23 +1,16 @@
-package basic;
-
 import java.util.Scanner;
 
-public class Reverse {
-    public static void main(String[] args) {
-        String[] strArr = new String[5];
-        Scanner scanner = new Scanner(System.in);
-        int i;
+public class jh{
+    public static void main(String args[]) {
+        Scanner rd = new Scanner(System.in);
+        String array[] = new String[5];
 
-        for (i = 0; i < strArr.length; i++) {
-            strArr[i] = scanner.next();
+        for (int i = 0; i < 5; i++) {
+            array[i] = rd.next();
         }
-        for (i = strArr.length - 1; i >= 0; i--) {
-            System.out.print(strArr[i] + " ");
+        for(int j=4; j>=0; j--, System.out.print('\t')){
+            System.out.print(array[j]);
         }
-        System.out.println();
+
     }
 }
-/* running result
-감 호박 수박 사과 배
-배 사과 수박 호박 감 
-*/
