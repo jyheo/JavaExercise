@@ -1,11 +1,6 @@
-package classes;
-
-/**
- * Created by jyheo on 2016-03-26.
- */
 public class MultiplicationTable {
     private int number;
-    private int max_number = 9;
+    private static int max_number = 9;
 
     boolean setNumber(int num) {
         if (1 <= num && num <= max_number) {
@@ -19,7 +14,7 @@ public class MultiplicationTable {
     int getNumber() { return number; }
 
     boolean setMaxNumber(int max_num) {
-        if (9 <= max_num && max_num <= 19) {
+        if (2 <= max_num && max_num <= 9) {
             max_number = max_num;
             return true;
         } else {
@@ -30,18 +25,18 @@ public class MultiplicationTable {
     int getMaxNumber() { return max_number; }
 
     void printTable() {
-        for (int i = 2; i <= max_number; i++) {
+        for (int i = 1; i <= max_number; i++) {
             System.out.println(number + "x" + i + "=" + number * i);
         }
     }
 
     public static void main(String[] args) {
         MultiplicationTable mtable = new MultiplicationTable();
-
-        mtable.max_number = 19; // BAD practice!
-        mtable.setMaxNumber(19);
-
-        mtable.setNumber(4);
-        mtable.printTable();
+        int n;
+        mtable.setMaxNumber(9);
+        for(n=2; n<=max_number; n++){
+        	mtable.setNumber(n);
+        	mtable.printTable();
+        }
     }
 }
