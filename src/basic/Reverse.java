@@ -1,23 +1,15 @@
-package basic;
-
 import java.util.Scanner;
 
-public class Reverse {
+public class babo {
     public static void main(String[] args) {
-        String[] strArr = new String[5];
-        Scanner scanner = new Scanner(System.in);
-        int i;
-
-        for (i = 0; i < strArr.length; i++) {
-            strArr[i] = scanner.next();
+        String[] names = new String[5];
+        Scanner a = new Scanner(System.in);
+        for (int i = 0; i < names.length; i++) {
+            names[i] = a.next();
         }
-        for (i = strArr.length - 1; i >= 0; i--) {
-            System.out.print(strArr[i] + " ");
+        for (int i = names.length - 1; i >= 0; i--) {
+            System.out.print(names[i] + " ");
         }
         System.out.println();
     }
 }
-/* running result
-감 호박 수박 사과 배
-배 사과 수박 호박 감 
-*/
