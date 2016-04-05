@@ -2,14 +2,41 @@ package classes;
 
 import java.util.Scanner;
 
-/**
- * Created by jyheo on 2016-04-04.
- */
+class Fish{
+    public String name;
+    public  String shape;
+    public  int x, y;
+
+
+    public Fish(String name, String shape) {
+        this.name = name;
+        this.shape = shape;
+        x = 0;
+        y = 0;
+    }
+
+    public void display(int x, int y) {
+        if (this.x == x && this.y == y) {
+            System.out.print(shape);
+        }
+    }
+    public void move(int width, int height) {
+        double rand = Math.random();
+        if (rand <= 0.5)
+            x++;
+        else
+            y++;
+        if (x >= width)
+            x = 0;
+        if (y >= height)
+            y = 0;
+    }
+
+}
 class FoolFish extends Fish {
     FoolFish(String name, String shape) {
         super(name, shape);
     }
-
     public void move(int width, int height) {
         x++;
         y++;
@@ -18,7 +45,9 @@ class FoolFish extends Fish {
         if (y >= height)
             y = 0;
     }
+
 }
+
 
 public class Lake10 {
     private int width;
@@ -70,3 +99,5 @@ public class Lake10 {
         }
     }
 }
+
+
