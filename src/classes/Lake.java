@@ -1,4 +1,4 @@
-package classes;
+
 
 import java.util.Scanner;
 
@@ -8,7 +8,7 @@ import java.util.Scanner;
 class Fish {
     private String name;
     private String shape;
-    protected int x, y;
+    private int x, y;
 
     public Fish(String name, String shape) {
         this.name = name;
@@ -17,19 +17,27 @@ class Fish {
         y = 0;
     }
 
-    public Fish() {
+    public Fish(){
         this.name = "Unknown";
         this.shape = "<--<";
         x = 0;
         y = 0;
     }
 
-    public void move(int width, int height) {
+    public void move1(int width, int height) {
         double rand = Math.random();
         if (rand < 0.5)
             x++;
         else
             y++;
+        if (x >= width)
+            x = 0;
+        if (y >= height)
+            y = 0;
+    }
+    public void move2(int width, int height) {
+        x++;
+        y++;
         if (x >= width)
             x = 0;
         if (y >= height)
@@ -46,19 +54,30 @@ class Fish {
 public class Lake {
     private int width;
     private int height;
-    private Fish fish;
-    private Fish fish2;
+
+
+    private Fish fish3[] = new Fish[10];
+
 
     public Lake(int width, int height) {
         this.width = width;
         this.height = height;
-        fish = new Fish();
-        fish2 = new Fish("p", "<***<");
+        for(int i=0;i<10;i++) {
+            fish3[i] = new Fish();
+        }
+
+
     }
 
     public void moveFish() {
-        fish.move(width, height);
-        fish2.move(width, height);
+       for(int i=0;i<10;i++){
+           if(i%2==0) {
+               fish3[i].move2(width, height);
+           }
+           else{
+               fish3[i].move1(width, height);
+           }
+       }
     }
 
     public void display() {
@@ -68,8 +87,9 @@ public class Lake {
         for (int i = 0; i < height; i++) {
             System.out.print("|");
             for (int j = 0; j < width; j++) {
-                fish.display(j, i);
-                fish2.display(j, i);
+                for(int k=0; k<10;k++) {
+                    fish3[k].display(j, i);
+                }
                 System.out.print(" ");
             }
             System.out.println("|");
