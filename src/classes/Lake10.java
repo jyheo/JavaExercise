@@ -68,5 +68,7 @@ public class Lake10 {
             lake.display();
             scanner.next();
         }
+        
+        lake.moveFish();
     }
 }
