@@ -2,6 +2,8 @@ package classes;
 
 import java.util.Scanner;
 
+yrdy
+
 /**
  * Created by jyheo on 2016-04-04.
  */
