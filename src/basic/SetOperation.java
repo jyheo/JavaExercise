@@ -1,17 +1,48 @@
-package basic;
-
 /**
  * Created by jyheo on 2016-03-22.
  */
-public class SetOperation {
+public class babo {
     public static int[] union(int[] A, int[] B) {
-        // TODO: return union of set A and B
-        return new int[0];
+        int[] Array1 = new int[A.length +  B.length-intersection(A,B).length];
+        for(int i=0;i< A.length;i++){
+            Array1[i] = A[i];
+        }
+        int a = A.length;
+        boolean b = true;
+        for(int i=0;i<B.length;i++){
+            for(int j=0;j<A.length;j++){
+                if(B[i] == A[j]) {
+                    b = false;
+                }
+            }
+            if(b == true){
+                Array1[a] = B[i];
+                a++;
+            }
+            b =true;
+        }
+        return Array1;
     }
 
     public static int[] intersection(int[] A, int[] B) {
-        // TODO: return intersection of set A and B
-        return new int[0];
+        int c = 0;
+        for(int i=0;i<A.length;i++){
+            for(int j=0;j<B.length;j++){
+                if(A[i] == B[i])
+                    c++;
+            }
+        }
+        int Array2[] = new int[c];
+        c = 0;
+        for(int i=0;i<A.length;i++){
+            for(int j=0;j<B.length;j++){
+                if(A[i] == B[i]){
+                    Array2[c] = A[i];
+                    c++;
+                }
+            }
+        }
+        return Array2;
     }
 
     public static void print_array(int[] A) {
