@@ -1,9 +1,7 @@
-package classes;
-
 import java.util.Scanner;
 
 /**
- * Created by jyheo on 2016-04-10.
+ * Created by jyheo on 2016-04-11.
  */
 
 abstract class MyObject {
@@ -62,6 +60,53 @@ class MyFish extends MyObject implements Movable, Drawable {
     }
 }
 
+
+//플랑크톤
+class Plankton extends MyObject implements Movable {
+    public Plankton(String name, String shape, int x, int y) {
+        super(name, shape, x, y);
+    }
+
+    public void move(int width, int height) {
+        double rand = Math.random();
+        if (rand < 0.5)
+            x++;
+        else
+            y++;
+        if (x >= width)
+            x = 0;
+        if (y >= height)
+            y = 0;
+    }
+}
+
+
+// 다이버
+class Diver extends MyObject implements Movable, Drawable {
+    public Diver(String name, String shape, int x, int y) {
+        super(name, shape, x, y);
+    }
+
+    public void move(int width, int height) {
+        double rand = Math.random();
+        if (rand < 0.5)
+            x++;
+        else
+            y++;
+        if (x >= width)
+            x = 0;
+        if (y >= height)
+            y = 0;
+    }
+
+    public void display(int x, int y) {
+        if (this.x == x && this.y == y) {
+            System.out.print(shape);
+        }
+    }
+}
+
+
 public class Lake_If {
     private int width;
     private int height;
@@ -93,6 +138,18 @@ public class Lake_If {
             movables[i].move(width, height);
     }
 
+    // 플랑크톤
+    public void movePlankton() {
+        for (int i = 0; i < movables_num; i++)
+            movables[i].move(width, height);
+    }
+
+    // 다이버
+    public void moveDiver() {
+        for (int i = 0; i < movables_num; i++)
+            movables[i].move(width, height);
+    }
+
     public void display() {
         for (int i = 0; i < width; i++)
             System.out.print("-");
@@ -116,6 +173,10 @@ public class Lake_If {
         MyFish f = new MyFish("FIsh", "<#--<", 1, 1);
         lake.addDrawable(f);
         lake.addMovable(f);
+
+        Diver d = new Diver("Diver", "O-<--<", 1, 1);
+        lake.addDrawable(d);
+        lake.addMovable(d);
         lake.addDrawable(new MyRock("Rock", "(##)", 10, 10));
 
         Scanner scanner = new Scanner(System.in);
