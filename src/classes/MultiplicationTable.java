@@ -1,11 +1,9 @@
-package classes;
+ppublic class Multiplication {
 
-/**
- * Created by jyheo on 2016-03-26.
- */
-public class MultiplicationTable {
+
     private int number;
     private int max_number = 9;
+
 
     boolean setNumber(int num) {
         if (1 <= num && num <= max_number) {
@@ -16,7 +14,11 @@ public class MultiplicationTable {
         }
     }
 
-    int getNumber() { return number; }
+
+    int getNumber() {
+        return number;
+    }
+
 
     boolean setMaxNumber(int max_num) {
         if (9 <= max_num && max_num <= 19) {
@@ -27,7 +29,11 @@ public class MultiplicationTable {
         }
     }
 
-    int getMaxNumber() { return max_number; }
+
+    int getMaxNumber() {
+        return max_number;
+    }
+
 
     void printTable() {
         for (int i = 2; i <= max_number; i++) {
@@ -35,13 +41,20 @@ public class MultiplicationTable {
         }
     }
 
+
     public static void main(String[] args) {
-        MultiplicationTable mtable = new MultiplicationTable();
+        Multiplication mtable = new Multiplication();
+        for (int j = 1; j < 10; j++) {
 
-        mtable.max_number = 19; // BAD practice!
-        mtable.setMaxNumber(19);
+            mtable.max_number = j;// BAD practice!
+            mtable.setMaxNumber(j);
 
-        mtable.setNumber(4);
-        mtable.printTable();
+            for (int z = 1; z < 10; z++) {
+
+                mtable.setNumber(z);
+
+            }mtable.printTable();
+
+        }
     }
 }
