@@ -1,15 +1,14 @@
-package classes;
-
 import java.util.Scanner;
 
 /**
- * Created by jyheo on 2016-04-10.
+ * Created by SAM on 2016-04-14.
  */
 
 abstract class MyObject {
     protected String name;
     protected String shape;
     protected int x, y;
+
     public MyObject(String name, String shape, int x, int y) {
         this.name = name;
         this.shape = shape;
@@ -26,6 +25,10 @@ interface Drawable {
     void display(int x, int y);
 }
 
+interface MoveDrawable extends Movable, Drawable {
+
+}
+
 class MyRock extends MyObject implements Drawable {
     public MyRock(String name, String shape, int x, int y) {
         super(name, shape, x, y);
@@ -38,7 +41,7 @@ class MyRock extends MyObject implements Drawable {
     }
 }
 
-class MyFish extends MyObject implements Movable, Drawable {
+class MyFish extends MyObject implements MoveDrawable {
     public MyFish(String name, String shape, int x, int y) {
         super(name, shape, x, y);
     }
@@ -62,7 +65,7 @@ class MyFish extends MyObject implements Movable, Drawable {
     }
 }
 
-public class Lake_If {
+public class Lake_If2 {
     private int width;
     private int height;
     private final int max_objects = 10;
@@ -70,11 +73,15 @@ public class Lake_If {
     private int drawables_num = 0;
     private Movable[] movables = new Movable[max_objects];
     private int movables_num = 0;
+    private MoveDrawable[] movedrawables = new MoveDrawable[max_objects];
+    private int movedrawables_num=0;
 
-    public Lake_If(int width, int height) {
+
+    public Lake_If2(int width, int height) {
         this.width = width;
         this.height = height;
     }
+
 
     public void addDrawable(Drawable d) {
         if (drawables_num >= max_objects)
@@ -88,10 +95,30 @@ public class Lake_If {
         movables[movables_num++] = m;
     }
 
-    public void moveFish() {
+
+    public void addMoveDrawable(MoveDrawable md){
+        addMovable(md);
+        addDrawable(md);
+    }
+
+    public void addObject(MyObject obj){
+        if (obj instanceof Movable){
+            addMovable((Movable) obj);
+        }
+        if (obj instanceof Drawable){
+            addDrawable((Drawable) obj);
+        }
+    }
+
+
+
+
+    public void moveObject() {
         for (int i = 0; i < movables_num; i++)
             movables[i].move(width, height);
     }
+
+
 
     public void display() {
         for (int i = 0; i < width; i++)
@@ -112,15 +139,14 @@ public class Lake_If {
     }
 
     public static void main(String args[]) {
-        Lake_If lake = new Lake_If(80, 20);
+        Lake_If2 lake = new Lake_If2(80, 20);
         MyFish f = new MyFish("FIsh", "<#--<", 1, 1);
-        lake.addDrawable(f);
-        lake.addMovable(f);
+        lake.addMoveDrawable(f);
         lake.addDrawable(new MyRock("Rock", "(##)", 10, 10));
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            lake.moveFish();
+            lake.moveObject();
             lake.display();
             scanner.next();
         }
