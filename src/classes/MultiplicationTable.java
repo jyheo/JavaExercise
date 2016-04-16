@@ -6,7 +6,6 @@ package classes;
 public class MultiplicationTable {
     private int number;
     private int max_number = 9;
-
     boolean setNumber(int num) {
         if (1 <= num && num <= max_number) {
             number = num;
@@ -38,10 +37,13 @@ public class MultiplicationTable {
     public static void main(String[] args) {
         MultiplicationTable mtable = new MultiplicationTable();
 
-        mtable.max_number = 19; // BAD practice!
-        mtable.setMaxNumber(19);
+        mtable.max_number = 9; // BAD practice!
+        mtable.setMaxNumber(9);
 
-        mtable.setNumber(4);
-        mtable.printTable();
+        for(int i=2; i<10; i++) {
+            mtable.setNumber(i);
+            mtable.printTable();
+        }
     }
 }
+
