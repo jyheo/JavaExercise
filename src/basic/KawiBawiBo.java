@@ -1,11 +1,8 @@
-package basic;
-
 import java.util.Scanner;
-
 /**
- * Created by jyheo on 2016-03-10.
+ * Created by b10522 on 2016-03-14.
  */
-public class KawiBawiBo {
+public class yjyj {
     public static boolean isKawiBawiBoSwitch(String str) {
         switch (str) {
             case "가위":
@@ -22,8 +19,7 @@ public class KawiBawiBo {
             return true;
         else
             return false;
-        // this if statement can be simplified such as
-        // return (str.equals("가위") || str.equals("바위") || str.equals("보"));
+
     }
 
     public static void main(String args[]) {
@@ -43,10 +39,41 @@ public class KawiBawiBo {
         }
 
         // TODO: determine who win using if/else
+        if(bob.equals("가위")){
+            if(alice.equals("가위")){
+                System.out.println("Tie!");
+            }
+            if(alice.equals("바위")){
+                System.out.println("Alice win!");
+            }
+            if(alice.equals("보")){
+                System.out.println("Bob win!");
+            }
+        }
+        if(bob.equals("바위")){
+            if(alice.equals("가위")){
+                System.out.println("Alice win!");
+            }
+            if(alice.equals("바위")){
+                System.out.println("Tie!");
+            }
+            if(alice.equals("보")){
+                System.out.println("Alice win!");
+            }
+        }
+        if(bob.equals("보")){
+            if(alice.equals("가위")){
+                System.out.println("Alice win!");
+            }
+            if(alice.equals("바위")){
+                System.out.println("Bob win!");
+            }
+            if(alice.equals("보")){
+                System.out.println("Tie!");
+            }
+        }
 
-        // output will be one of :
-        System.out.println("Alice win!");
-        System.out.println("Bob win!");
-        System.out.println("Tie!");
+
+
     }
 }
