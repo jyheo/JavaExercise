@@ -1,23 +1,20 @@
-package basic;
-
-import java.util.Scanner;
-
-public class Reverse {
+public class dfd {
     public static void main(String[] args) {
-        String[] strArr = new String[5];
-        Scanner scanner = new Scanner(System.in);
-        int i;
+        int[] iArray = new int[10];
+        int i = 0;
+        int j = 0;
+        String[] strArray = new String[]{"감", "배", "사과", "포도"};
+        for (i = 0; i < iArray.length; i++) {
+            iArray[i] = i * 2;
+        }
+        for (int k : iArray) {
+            System.out.print(k + ",");
+        }
 
-        for (i = 0; i < strArr.length; i++) {
-            strArr[i] = scanner.next();
-        }
-        for (i = strArr.length - 1; i >= 0; i--) {
-            System.out.print(strArr[i] + " ");
-        }
         System.out.println();
+
+        for (j = strArray.length - 1; j >= 0; j--) {
+            System.out.print(strArray[j] + ",");
+        }
     }
 }
-/* running result
-감 호박 수박 사과 배
-배 사과 수박 호박 감 
-*/
