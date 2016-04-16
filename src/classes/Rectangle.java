@@ -5,40 +5,62 @@ public class Rectangle {
 
     public void setPoints(int _x1, int _y1, int _x2, int _y2) {
         // TODO, check if x, y > 0
-        x1 = _x1;
-        y1 = _y1;
-        x2 = _x2;
-        y2 = _y2;
+        if(x1>=0 && y1>=0 && x2>=0 && y2>=0) {
+            x1 = _x1;
+            y1 = _y1;
+            x2 = _x2;
+            y2 = _y2;
+        }
     }
 
     public int getWidth() {
         // TODO
-        return 0;
+        int width=0;
+        if(x1>x2)
+            width = x1-x2;
+        else
+            width = x2-x1;
+        return width;
     }
 
     public int getHeight() {
         // TODO
-        return 0;
+        int height;
+        if(y1>y2)
+            height = y1-y2;
+        else
+            height = y2-y1;
+        return height;
     }
 
     public int getArea() {
         // TODO
-        return 0;
+        return getHeight()*getWidth();
     }
 
     public boolean equals(Rectangle r) {
         // TODO
-        return false;
+        if(r.x1==x2 && r.x2==x1 && r.y1==y2 && r.y2==y1) {
+            return true;
+        }
+        else
+            return false;
     }
 
     public boolean in(Rectangle r) {
         // TODO
-        return false;
+        if(x1<=r.x1 && y1<=r.y1 && x2<=r.x2 && y2<=r.y2)
+            return true;
+        else
+            return false;
     }
 
     public boolean overlap(Rectangle r) {
         // TODO
-        return false;
+        if(r.x1<=x1 || r.x2>=x2 && r.y1<=y1 || r.y2>=y2)
+            return true;
+        else
+            return false;
     }
 
     public static void main(String[] args) {
