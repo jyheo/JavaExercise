@@ -1,11 +1,4 @@
-package classes;
-
 import java.util.Scanner;
-
-/**
- * Created by jyheo on 2016-04-10.
- */
-
 abstract class MyObject {
     protected String name;
     protected String shape;
@@ -62,7 +55,7 @@ class MyFish extends MyObject implements Movable, Drawable {
     }
 }
 
-public class Lake_If {
+public class Lake{
     private int width;
     private int height;
     private final int max_objects = 10;
@@ -71,7 +64,7 @@ public class Lake_If {
     private Movable[] movables = new Movable[max_objects];
     private int movables_num = 0;
 
-    public Lake_If(int width, int height) {
+    public Lake(int width, int height) {
         this.width = width;
         this.height = height;
     }
@@ -112,7 +105,7 @@ public class Lake_If {
     }
 
     public static void main(String args[]) {
-        Lake_If lake = new Lake_If(80, 20);
+        Lake lake = new Lake(80, 20);
         MyFish f = new MyFish("FIsh", "<#--<", 1, 1);
         lake.addDrawable(f);
         lake.addMovable(f);
