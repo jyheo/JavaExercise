@@ -1,10 +1,10 @@
 package javalang;
 
-import java.util.Calendar;
-
 /**
- * Created by jyheo on 2016-04-25.
+ * Created by 철순 on 2016-04-26.
  */
+
+import java.util.Calendar;
 
 public class javalang {
     final static String input = "1, 2, 3, 4.4, 5, 6";
@@ -13,9 +13,34 @@ public class javalang {
             " but the length and content of the sequence can be changed through certain method calls.";
 
     public static void printCalendar(Calendar cal, boolean Korean) {
-        // TODO: cal의 내용을 Korean이 true/false에 따라 아래와 같이 출력하기.
-        // true인 경우: 2016년 4월 26일 화요일 14시 12분
-        // false인 경우: 26-4-2016 Tue. 14:12
+        int year = cal.get(cal.YEAR);
+        int month = cal.get(cal.MONTH);
+        int date = cal.get(cal.DATE);
+        int week = cal.get(cal.DAY_OF_WEEK);
+        int hour = cal.get(cal.HOUR);
+        int minute = cal.get(cal.MINUTE);
+        String K_Week[] = {"일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"};
+        String E_Week[] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+
+        StringBuffer print = new StringBuffer();
+
+        if(Korean) {
+            print.append(year+"년 ");
+            print.append(month+"월 ");
+            print.append(date+"일 ");
+            print.append(K_Week[week-1]+" ");
+            print.append(hour+"시 ");
+            print.append(minute+"분");
+        }
+        else{
+            print.append(date+"-"+month+"-"+year+" ");
+            print.append(E_Week[week-1]+". ");
+            print.append(hour+":"+minute);
+        }
+        System.out.println(print);
+    }
+    public String toString(){
+        return "HelloJava";
     }
 
     public static void main(String[] args) {
@@ -24,13 +49,11 @@ public class javalang {
         float sum = 0;
         for (int i = 0; i < tokens.length; i++) {
             System.out.println(tokens[i].trim());
+            sum += Float.parseFloat(tokens[i]);
         }
-        // TODO: input 문자열의 숫자를 모두 합하여 sum에 넣기.
         System.out.println("sum:" + sum);
 
-        // TODO: input2 문자열에서 .을 !로 바꾸기
-        // Hint: String.replace()
-        String new_input2 = input2; // 이 부분을 고칠 것.
+        String new_input2 = input2.replace(".",  "!"); // 이 부분을 고칠 것.
         System.out.println(new_input2);
 
         // TODO: 아래 문장 수행결과로 HelloJava 가 출력되도록 class javalng에 메소드를 추가하기.
@@ -38,5 +61,6 @@ public class javalang {
 
         Calendar now = Calendar.getInstance();
         printCalendar(now, true);
+        printCalendar(now, false);
     }
 }
