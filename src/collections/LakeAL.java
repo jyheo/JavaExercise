@@ -1,6 +1,4 @@
-package collections;
-
-import sun.java2d.loops.DrawLine;
+package methods;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -71,8 +69,7 @@ public class LakeAL {
     private int width;
     private int height;
     private final int max_objects = 10;
-    private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
-    private Movable[] movables = new Movable[max_objects];
+    private static ArrayList<MyObject> myobjects = new ArrayList<MyObject>();
     private int movables_num = 0;
 
     public LakeAL(int width, int height) {
@@ -82,22 +79,29 @@ public class LakeAL {
 
     public void addMyObject(MyObject obj) {
         if (obj instanceof Drawable) {
-            drawables.add((Drawable)obj);
+           myobjects.add(obj);
+           //myobjects.getClass().getInterfaces();
+           //drawables.add((Drawable)obj);
+           //myobjects.getClass().getInterfaces();
         }
         if (obj instanceof Movable) {
             addMovable((Movable)obj);
+           // myobjects.getClass().getInterfaces();
         }
     }
 
     public void addMovable(Movable m) {
         if (movables_num >= max_objects)
             return;
-        movables[movables_num++] = m;
+        //myobjects.add((MyObject)m);
+        movables_num++;
+       
+        
     }
 
     public void moveObjects() {
         for (int i = 0; i < movables_num; i++)
-            movables[i].move(width, height);
+            ((Movable) myobjects.get(i)).move(width, height);
     }
 
     public void display() {
@@ -107,7 +111,9 @@ public class LakeAL {
         for (int i = 0; i < height; i++) {
             System.out.print("|");
             for (int j = 0; j < width; j++) {
-                for (Drawable d : drawables) {
+                Iterator<MyObject> it = myobjects.iterator();
+                while (it.hasNext()) {
+                   Drawable d = (Drawable)it.next();
                     d.display(j, i);
                 }
                 System.out.print(" ");
@@ -122,9 +128,9 @@ public class LakeAL {
     public static void main(String args[]) {
         LakeAL lake = new LakeAL(80, 20);
         MyFish f = new MyFish("FIsh", "<#--<", 1, 1);
-        lake.addMyObject(f);
+        lake.addMyObject(f); //myobjects 의 ArrayList 에 추가 됨.
         lake.addMyObject(new MyRock("Rock", "(##)", 10, 10));
-
+       
         Scanner scanner = new Scanner(System.in);
         while (true) {
             lake.moveObjects();
