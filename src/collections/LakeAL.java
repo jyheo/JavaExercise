@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
 
-/**
- * Created by jyheo on 2016-05-01.
- */
+
 abstract class MyObject {
     protected String name;
     protected String shape;
@@ -71,9 +69,10 @@ public class LakeAL {
     private int width;
     private int height;
     private final int max_objects = 10;
-    private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
-    private Movable[] movables = new Movable[max_objects];
-    private int movables_num = 0;
+    private ArrayList<MyObject> myobjects = new ArrayList<>();
+    //private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+    //private Movable[] movables = new Movable[max_objects];
+    //private int movables_num = 0;
 
     public LakeAL(int width, int height) {
         this.width = width;
@@ -81,23 +80,29 @@ public class LakeAL {
     }
 
     public void addMyObject(MyObject obj) {
-        if (obj instanceof Drawable) {
-            drawables.add((Drawable)obj);
-        }
-        if (obj instanceof Movable) {
-            addMovable((Movable)obj);
-        }
+        myobjects.add(obj);
     }
 
-    public void addMovable(Movable m) {
+    /*public void addMovable(Movable m) {
         if (movables_num >= max_objects)
             return;
         movables[movables_num++] = m;
-    }
+    }*/
 
-    public void moveObjects() {
-        for (int i = 0; i < movables_num; i++)
-            movables[i].move(width, height);
+    public void moveObjects() { //moveable을 구현하고있는지 다 확인
+        Iterator<MyObject> it = myobjects.iterator();
+        while(it.hasNext()){
+            MyObject obj = it.next();
+            if(obj instanceof Movable){
+                //Movable m = (movable)obj;
+                ((Movable)obj).move(width, height);
+            }
+        }
+       /* for(MyObject obj: myobjects){
+            if(obj instanceof Movable){
+                //Movable m = (movable)obj;
+                ((Movable)obj).move(width, height);
+        }*/
     }
 
     public void display() {
@@ -107,9 +112,19 @@ public class LakeAL {
         for (int i = 0; i < height; i++) {
             System.out.print("|");
             for (int j = 0; j < width; j++) {
-                for (Drawable d : drawables) {
+                
+                for(MyObject obj: myobjects){
+                        if(obj instanceof Drawable){
+                          /*  Drawable d = (Drawable)obj;
+                            d.display(j, i);*/
+                            ((Drawable)obj).display(j, i);
+                        }
+                    }
+                /*Iterator<Drawable> it = drawables.iterator();
+                while (it.hasNext()) {
+                    Drawable d = it.next();
                     d.display(j, i);
-                }
+                }*/
                 System.out.print(" ");
             }
             System.out.println("|");
