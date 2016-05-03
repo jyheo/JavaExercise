@@ -1,4 +1,3 @@
-package collections;
 
 import sun.java2d.loops.DrawLine;
 
@@ -70,34 +69,32 @@ class MyFish extends MyObject implements MoveDrawable {
 public class LakeAL {
     private int width;
     private int height;
-    private final int max_objects = 10;
-    private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
-    private Movable[] movables = new Movable[max_objects];
-    private int movables_num = 0;
-
+    private ArrayList<MyObject> myobjects = new ArrayList<>();
     public LakeAL(int width, int height) {
         this.width = width;
         this.height = height;
     }
 
     public void addMyObject(MyObject obj) {
-        if (obj instanceof Drawable) {
-            drawables.add((Drawable)obj);
-        }
-        if (obj instanceof Movable) {
-            addMovable((Movable)obj);
-        }
-    }
-
-    public void addMovable(Movable m) {
-        if (movables_num >= max_objects)
-            return;
-        movables[movables_num++] = m;
+       myobjects.add(obj);
     }
 
     public void moveObjects() {
-        for (int i = 0; i < movables_num; i++)
-            movables[i].move(width, height);
+      Iterator<MyObject> it = myobjects.iterator();
+        while(it.hasNext()){
+            MyObject obj = it.next();
+            if(obj instanceof Movable){
+                Movable m = (Movable) obj;
+                m.move(width,height);
+            }
+        }
+        /*
+        for(MyObject obj) : myobjects){
+         if(obj instanceof Movable){
+              Movable m = (Movable)obj;
+              m.move(width, height);
+              같은거고 사용가능함.
+         */
     }
 
     public void display() {
@@ -107,8 +104,11 @@ public class LakeAL {
         for (int i = 0; i < height; i++) {
             System.out.print("|");
             for (int j = 0; j < width; j++) {
-                for (Drawable d : drawables) {
-                    d.display(j, i);
+                for(MyObject obj : myobjects){
+                    if(obj instanceof Drawable){
+                        Drawable d = (Drawable)obj;
+                        d.display(j,i); //((Drawable)obj).display(j,i);
+                    }
                 }
                 System.out.print(" ");
             }
