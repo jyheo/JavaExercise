@@ -13,24 +13,80 @@ public class javalang {
             " but the length and content of the sequence can be changed through certain method calls.";
 
     public static void printCalendar(Calendar cal, boolean Korean) {
-        // TODO: cal의 내용을 Korean이 true/false에 따라 아래와 같이 출력하기.
-        // true인 경우: 2016년 4월 26일 화요일 14시 12분
-        // false인 경우: 26-4-2016 Tue. 14:12
+        int year = cal.get(Calender.YEAR);
+        int month = cal.get(Calender.MONTH)+1;
+        int day = cal.get(Calender.DAY_OF_MONTH);
+        int dayofweek = cal.get(Calender.DAY_OF_WEEK);
+        int hour = cal.get(Calender.HOUR);
+        int hourofday =cal.get(Calender.HOUR_OF_DAY);
+        int minute = cal.get(Calender.MINUTE);
+        StringBuffer sb = new StringBuffer();
+        if(korean){
+            sb.append(year+"년");
+            sb.append(month+"월 ");
+            sb.append(day+"일 ");
+            sb.append(dayOfWeek+" ");
+            sb.append(hour+"시 ");
+            sb.append(minute+"분 ");
+        swich(dayodweek){
+            case Calender.SUNDAY:
+               sb.replace(12,13,"일요일");
+                break;
+            case Calender.MONDAY:
+                sb.replace(12,13,"월요일");
+                break;
+            case Calender.TUSDAY:
+                sb.replace(12,13,"화요일");
+                break;
+                case Calender.WEDNESDAY:
+                    sb.replace(12,13,"수요일");
+                    break;
+                case Calender.THURSDAY:
+                    sb.replace(12,13,"목요일");
+                    break;
+                case Calender.FRIDAY:
+                    sb.replace(12,13,"금요일");
+                    break;
+                case Calender.SATURDAY:
+                    sb.replace(12,13,"토요일");
+                    break;
+        }
+       System.out.println(sb);
     }
-
+   else{
+          sb.append(day+"-");
+          sb.append(month+"-");
+          sb.append(year+" ");
+          sb.append(dayOfWeek+".");
+          sb.append(hour+":");
+          sb.append(minute+"");
+              switch(dayOfWeek){
+                case Calendar.SUNDAY : sb.replace(12,13,"SUNDAY"); break;
+                case Calendar.MONDAY : sb.replace(12,13,"MONDAY"); break;
+                case Calendar.TUESDAY : sb.replace(12,13,"TUESDAY"); break;
+                case Calendar.WEDNESDAY : sb.replace(12,13,"WEDNESDAY"); break;
+                case Calendar.THURSDAY : sb.replace(12,13,"THURSDAY"); break;
+                case Calendar.FRIDAY : sb.replace(12,13,"FRIDAY"); break;
+                case Calendar.SATURDAY : sb.replace(12,13,"SATURDAY"); break;
+                           }
+                        System.out.println(sb);
+                   }
+        }
     public static void main(String[] args) {
         // StringTokenizer was deprecated! use split() of String
         String[] tokens = input.split(",");
         float sum = 0;
         for (int i = 0; i < tokens.length; i++) {
             System.out.println(tokens[i].trim());
+            sum+=Float.parseFloat(token[i].trim());
         }
         // TODO: input 문자열의 숫자를 모두 합하여 sum에 넣기.
         System.out.println("sum:" + sum);
 
         // TODO: input2 문자열에서 .을 !로 바꾸기
         // Hint: String.replace()
-        String new_input2 = input2; // 이 부분을 고칠 것.
+        String new_input2 = input2;
+        String new_input2 = input2.replace(".","!");// 이 부분을 고칠 것.
         System.out.println(new_input2);
 
         // TODO: 아래 문장 수행결과로 HelloJava 가 출력되도록 class javalng에 메소드를 추가하기.
@@ -38,5 +94,6 @@ public class javalang {
 
         Calendar now = Calendar.getInstance();
         printCalendar(now, true);
+        printCalender(now, false);
     }
 }
