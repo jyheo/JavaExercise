@@ -4,14 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Created by jyheo on 2016-05-17.
- */
-
 abstract class MyObject extends JButton {
     protected String name;
     protected String shape;
-    protected int x, y;
+    //protected int x, y;
     public MyObject(String name, String shape, int x, int y) {
         super(shape);
         setLocation(x, y);
@@ -19,8 +15,7 @@ abstract class MyObject extends JButton {
         setVisible(true);
         this.name = name;
         this.shape = shape;
-        this.x = x;
-        this.y = y;
+
     }
 
     public void new_move(int width, int height) {};
@@ -40,7 +35,8 @@ class MyFish extends MyObject {
     }
 
     public void new_move(int width, int height) {
-        // getX(), getY()
+        int x =getX();
+        int y =getY();
 
         double rand = Math.random();
         if (rand < 0.5)
@@ -86,11 +82,12 @@ public class Lake_GUI extends JFrame {
             obj.new_move(width, height);
         }
 
-        // getContentPane().getWidth(), getHeight()
 
-        //for (Component c : getContentPane().getComponents()) {
-        //
-        //}
+        for (Component c : getContentPane().getComponents()) {
+            if(c instanceof Component){
+                ((MyObject)c).new_move(getWidth(),getHeight());
+            }
+        }
     }
 
     public static void main(String args[]) throws InterruptedException {
