@@ -116,7 +116,7 @@ public class LakeAL {
     }
 
     public static void main(String args[]) {
-        LakeAL lake = new LakeAL(80, 20);
+        LakeAL lake = new LakeAL(100, 100);
         MyFish f = new MyFish("FIsh", "<#--<", 1, 1);
         lake.addMyObject(f);
         lake.addMyObject(new MyRock("Rock", "(##)", 10, 10));
