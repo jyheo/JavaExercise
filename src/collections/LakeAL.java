@@ -2,6 +2,7 @@ package collections;
 
 import sun.java2d.loops.DrawLine;
 
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -24,30 +25,24 @@ abstract class MyObject {
 interface Movable {
     void move(int width, int height);
 }
-
 interface Drawable {
     void display(int x, int y);
 }
-
 interface MoveDrawable extends Movable, Drawable {}
-
 class MyRock extends MyObject implements Drawable {
     public MyRock(String name, String shape, int x, int y) {
         super(name, shape, x, y);
     }
-
     public void display(int x, int y) {
         if (this.x == x && this.y == y) {
             System.out.print(shape);
         }
     }
 }
-
 class MyFish extends MyObject implements MoveDrawable {
     public MyFish(String name, String shape, int x, int y) {
         super(name, shape, x, y);
     }
-
     public void move(int width, int height) {
         double rand = Math.random();
         if (rand < 0.5)
@@ -59,47 +54,44 @@ class MyFish extends MyObject implements MoveDrawable {
         if (y >= height)
             y = 0;
     }
-
     public void display(int x, int y) {
         if (this.x == x && this.y == y) {
             System.out.print(shape);
         }
     }
 }
-
 public class LakeAL {
     private int width;
     private int height;
-    private final int max_objects = 10;
-    private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
-    private Movable[] movables = new Movable[max_objects];
-    private int movables_num = 0;
-
+  //  private final int max_objects = 10;
+  //  private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+   // private Movable[] movables = new Movable[max_objects];
+   // private int movables_num = 0;
+    private ArrayList<MyObject> myobjects = new ArrayList<>();
     public LakeAL(int width, int height) {
         this.width = width;
         this.height = height;
     }
-
     public void addMyObject(MyObject obj) {
-        if (obj instanceof Drawable) {
-            drawables.add((Drawable)obj);
-        }
-        if (obj instanceof Movable) {
-            addMovable((Movable)obj);
-        }
+        myobjects.add(obj);
     }
-
-    public void addMovable(Movable m) {
-        if (movables_num >= max_objects)
-            return;
-        movables[movables_num++] = m;
-    }
-
     public void moveObjects() {
-        for (int i = 0; i < movables_num; i++)
-            movables[i].move(width, height);
+        Iterator<MyObject> it = myobjects.iterator();
+        while (it.hasNext()){
+            MyObject obj = it.next();
+            if(obj instanceof Movable){
+                Movable m = (Movable)obj;
+                m.move(width , height);
+            }
+        }
+        /* 위의 Iterator와 같은 역할을 한다.
+        for (MyObject obj: myobjects){
+            if(obj instanceof Movable){
+                Movable m = (Movable)obj;
+                m.move(width , height);
+            }
+        }*/
     }
-
     public void display() {
         for (int i = 0; i < width; i++)
             System.out.print("-");
@@ -107,8 +99,12 @@ public class LakeAL {
         for (int i = 0; i < height; i++) {
             System.out.print("|");
             for (int j = 0; j < width; j++) {
-                for (Drawable d : drawables) {
-                    d.display(j, i);
+                for (MyObject obj : myobjects) {
+                    if(obj instanceof Drawable){
+                        Drawable d = (Drawable)obj;
+                        d.display(j,i);
+                        //((Drawable)obj).display(j,i); 위의 두줄과 같다
+                    }
                 }
                 System.out.print(" ");
             }
@@ -120,11 +116,10 @@ public class LakeAL {
     }
 
     public static void main(String args[]) {
-        LakeAL lake = new LakeAL(80, 20);
+        LakeAL lake = new LakeAL(100, 100);
         MyFish f = new MyFish("FIsh", "<#--<", 1, 1);
         lake.addMyObject(f);
         lake.addMyObject(new MyRock("Rock", "(##)", 10, 10));
-
         Scanner scanner = new Scanner(System.in);
         while (true) {
             lake.moveObjects();
