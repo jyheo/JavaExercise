@@ -38,10 +38,12 @@ public class MultiplicationTable {
     public static void main(String[] args) {
         MultiplicationTable mtable = new MultiplicationTable();
 
-        mtable.max_number = 19; // BAD practice!
-        mtable.setMaxNumber(19);
+        mtable.setMaxNumber(9);
 
-        mtable.setNumber(4);
+        for(int i=2;i<=9;i++)
+        {
+        mtable.setNumber(i);
         mtable.printTable();
+         }
     }
 }
