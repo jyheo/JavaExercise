@@ -1,6 +1,10 @@
 package classes;
 
 /**
+ * Created by mamazz on 2016-06-
+ */
+ 
+/**
  * 1. Array of Objects
  * 2. this reference
  * 3. constructor, this()
@@ -8,11 +12,17 @@ package classes;
  * 5. garbage collection
  * 6. static method
  */
+ 
 public class Set {
     private int[] array;
     private int size;
     private final int init_size = 10; // what is final?
-
+    private int[] ArrayCopy(int a[],int[] b){
+        for(int i=0; i<a.length; i++){
+            b[i]=a[i];
+        }
+        return b;
+    }
     public Set() {  // constructor
         array = new int[init_size];
         size = 0;
@@ -25,18 +35,27 @@ public class Set {
         this.size = initial_set.length;
     }
 
+   public Set(int[] initial_set) {
+        this();
+        extendArray(initial_set.length);
+        //ArrayCopy(initial_set,array);
+        //System.arraycopy(initial_set, 0, array, 0, initial_set.length);
+        addElement(initial_set);
+        this.size = initial_set.length;
+    }
+
     public Set(Set s) {
         this();
         extendArray(s.size);
-        System.arraycopy(s.array, 0, this.array, 0, s.size);
+        ArrayCopy(s.array, this.array);
         // TODO: add arraycopy method in class Set, and replace System.arraycopy with the arraycopy of Set.
         this.size = s.size;
     }
-
+    
     private void extendArray(int added_length) {
         if (size + added_length > array.length) {
             int[] tmp_array = new int[size + added_length + init_size];
-            System.arraycopy(array, 0, tmp_array, 0, size);
+            ArrayCopy(array,tmp_array);
             array = tmp_array;
             // where is object referenced by this.array
             // it will be garbage-collected.
@@ -88,20 +107,23 @@ public class Set {
         for (int i = 0; i < size; i++)
             System.out.print(array[i] + " ");
         System.out.println("}");
+
     }
 
     public static Set intersection(Set A, Set B) {
-        // TODO: implement static intersection()
-        return new Set();
+       // TODO: implement static intersection()
+         Set set = new Set();
+         Set C = A.intersection(B);
+         return C;
     }
 
     public static void main(String[] args) {
-        Set A = new Set();
-        A.addElement(3);
-        A.addElement(new int[]{4, 5, 6, 7, 8, 10, 13});
-        Set B = new Set(new int[]{2, 4, 5, 6, 7, 9, 10, 11, 12});
-        Set C = A.union(B);
-        Set D = A.intersection(B);
+         Set A = new Set();
+         A.addElement(3);
+         A.addElement(new int[]{4, 5, 6, 7, 8, 10, 13});
+         Set B = new Set(new int[]{2, 4, 5, 6, 7, 9, 10, 11, 12});
+         Set C = A.union(B);
+         Set D = A.intersection(B);
 
         Set[] sets = new Set[]{A, B, C, D}; // array of objects
         for (Set s : sets) {
