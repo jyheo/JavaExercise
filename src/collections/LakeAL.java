@@ -67,13 +67,15 @@ class MyFish extends MyObject implements MoveDrawable {
     }
 }
 
-public class LakeAL {
+public class LakeAL {//LakeAL의 drawables와 movables 속성 두개를 아래와 같이 ArrayList<MyObject> 하나로 바꿔서 코드를 수정할 것.
     private int width;
     private int height;
-    private final int max_objects = 10;
-    private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
-    private Movable[] movables = new Movable[max_objects];
-    private int movables_num = 0;
+    //private final int max_objects = 10;
+    //private ArrayList<Drawable> drawables = new ArrayList<Drawable>();
+    //private Movable[] movables = new Movable[max_objects];
+   // private int movables_num = 0;
+    private ArrayList<MyObject> myobjects = new ArrayList<>()
+
 
     public LakeAL(int width, int height) {
         this.width = width;
@@ -81,34 +83,33 @@ public class LakeAL {
     }
 
     public void addMyObject(MyObject obj) {
-        if (obj instanceof Drawable) {
-            drawables.add((Drawable)obj);
-        }
-        if (obj instanceof Movable) {
-            addMovable((Movable)obj);
-        }
+        myobjects.add(obj);
     }
 
-    public void addMovable(Movable m) {
-        if (movables_num >= max_objects)
-            return;
-        movables[movables_num++] = m;
-    }
+
 
     public void moveObjects() {
-        for (int i = 0; i < movables_num; i++)
-            movables[i].move(width, height);
+        Iterator<MyObject> it=myobjects.iterator();
+        while(it.hasNext()){
+            MyObject obj=it.next();
+            if(obj instanceof Movable){
+                Movable m=(Movable)obj;
+                m.move(width, height);
+            }
+        }
+        //for (int i = 0; i < movables_num; i++)
+          //  movables[i].move(width, height);
     }
 
     public void display() {
-        for (int i = 0; i < width; i++)
-            System.out.print("-");
-        System.out.println();
-        for (int i = 0; i < height; i++) {
+        for (int i = 0; i < height; i++)
             System.out.print("|");
-            for (int j = 0; j < width; j++) {
-                for (Drawable d : drawables) {
-                    d.display(j, i);
+
+        for (int i = 0; i < width; i++) {
+            for (MyObject obj:myobjects) {
+                 if(obj instanceof Drawble) {
+                    Drawble d=(Drawable)obj;
+                     d.display(j, i);
                 }
                 System.out.print(" ");
             }
