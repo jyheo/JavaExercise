@@ -1,5 +1,3 @@
-package classes;
-
 import java.util.Scanner;
 
 /**
@@ -62,6 +60,46 @@ class MyFish extends MyObject implements Movable, Drawable {
     }
 }
 
+class Plankton extends MyObject implements Movable{
+    public Plankton(String name, String shape, int x, int y) {
+        super(name, shape, x, y);
+    }
+    public void move (int width, int height){
+        double rand = Math.random();
+        if (rand < 0.5)
+            x++;
+        else
+            y++;
+        if (x >= width)
+            x = 0;
+        if (y >= height)
+            y = 0;
+    }
+}
+
+class MyDiver extends MyObject implements Movable, Drawable {
+    public MyDiver(String name, String shape, int x, int y) {
+        super(name, shape, x, y);
+    }
+
+    public void move(int width, int height) {
+        double rand = Math.random();
+        if (rand < 0.5)
+            x++;
+        else
+            y++;
+        if (x >= width)
+            x = 0;
+        if (y >= height)
+            y = 0;
+    }
+    public void display(int x, int y) {
+        if (this.x == x && this.y == y) {
+            System.out.print(shape);
+        }
+    }
+}
+
 public class Lake_If {
     private int width;
     private int height;
@@ -117,7 +155,11 @@ public class Lake_If {
         lake.addDrawable(f);
         lake.addMovable(f);
         lake.addDrawable(new MyRock("Rock", "(##)", 10, 10));
-
+        Plankton P = new Plankton("Plankton","",5,5);
+        lake.addMovable(P);
+        MyDiver D = new MyDiver("Diver","o<-<",6,6);
+        lake.addDrawable(D);
+        lake.addMovable(D);
         Scanner scanner = new Scanner(System.in);
         while (true) {
             lake.moveFish();
@@ -126,3 +168,4 @@ public class Lake_If {
         }
     }
 }
+
