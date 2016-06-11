@@ -1,14 +1,10 @@
-package classes;
 
 import java.util.Scanner;
 
-/**
- * Created by jyheo on 2016-04-03.
- */
 class Fish {
     private String name;
     private String shape;
-    protected int x, y;
+    private int x, y;
 
     public Fish(String name, String shape) {
         this.name = name;
@@ -36,6 +32,15 @@ class Fish {
             y = 0;
     }
 
+    public void move2(int width, int height){
+        x++;
+        y++;
+        if(x>=width)
+            x = 0;
+        if(y>=height)
+            y = 0;
+    }
+
     public void display(int x, int y) {
         if (this.x == x && this.y == y) {
             System.out.print(shape);
@@ -46,19 +51,28 @@ class Fish {
 public class Lake {
     private int width;
     private int height;
-    private Fish fish;
-    private Fish fish2;
+    private Fish[] fish = new Fish[10];
 
     public Lake(int width, int height) {
         this.width = width;
         this.height = height;
-        fish = new Fish();
-        fish2 = new Fish("p", "<***<");
+        for(int i=0; i<10; i++){
+            fish[i] = new Fish("fish"+(i+1), "<---<");
+        }
     }
 
     public void moveFish() {
-        fish.move(width, height);
-        fish2.move(width, height);
+        for(int i=0; i<10; i++){
+            switch(i%2){
+                case 0:
+                    fish[i].move2(width,height);
+                    break;
+                case 1:
+                    fish[i].move(width,height);
+                    break;
+            }
+        }
+
     }
 
     public void display() {
@@ -68,8 +82,9 @@ public class Lake {
         for (int i = 0; i < height; i++) {
             System.out.print("|");
             for (int j = 0; j < width; j++) {
-                fish.display(j, i);
-                fish2.display(j, i);
+                for(int k=0; k<10; k++){
+                    fish[k].display(j,i);
+                }
                 System.out.print(" ");
             }
             System.out.println("|");
@@ -89,3 +104,4 @@ public class Lake {
         }
     }
 }
+
