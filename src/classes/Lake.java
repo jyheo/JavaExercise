@@ -1,10 +1,5 @@
-package classes;
-
 import java.util.Scanner;
 
-/**
- * Created by jyheo on 2016-04-03.
- */
 class Fish {
     private String name;
     private String shape;
@@ -36,6 +31,14 @@ class Fish {
             y = 0;
     }
 
+    public void move2(int width, int height){
+        x++;
+        y++;
+        if(x>=width)
+            x=0;
+        if(y>=height)
+            y=0;
+    }
     public void display(int x, int y) {
         if (this.x == x && this.y == y) {
             System.out.print(shape);
@@ -46,19 +49,26 @@ class Fish {
 public class Lake {
     private int width;
     private int height;
-    private Fish fish;
-    private Fish fish2;
+    private Fish []fish;
 
     public Lake(int width, int height) {
         this.width = width;
         this.height = height;
-        fish = new Fish();
-        fish2 = new Fish("p", "<***<");
+        for(int i=0; i<10; i++){
+            fish[i]=new Fish();
+        }
+       // fish = new Fish();
+        //fish2 = new Fish("p", "<***<");
     }
 
     public void moveFish() {
-        fish.move(width, height);
-        fish2.move(width, height);
+        for(int k=0; k<10; k++){
+            if(k%2==1)
+                fish[k].move(width, height);
+             else
+                fish[k].move2(width, height);
+        }//물고기 움직임임
+
     }
 
     public void display() {
@@ -68,9 +78,11 @@ public class Lake {
         for (int i = 0; i < height; i++) {
             System.out.print("|");
             for (int j = 0; j < width; j++) {
-                fish.display(j, i);
-                fish2.display(j, i);
+                for(int k=0; k<10; k++){
+                    fish[k].display(j, i);
+                }
                 System.out.print(" ");
+
             }
             System.out.println("|");
         }
