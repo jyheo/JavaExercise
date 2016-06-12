@@ -1,10 +1,5 @@
-package classes;
 
 import java.util.Scanner;
-
-/**
- * Created by jyheo on 2016-04-10.
- */
 
 abstract class MyObject {
     protected String name;
@@ -26,6 +21,8 @@ interface Drawable {
     void display(int x, int y);
 }
 
+interface MoveDrawable extends Movable, Drawable{}
+
 class MyRock extends MyObject implements Drawable {
     public MyRock(String name, String shape, int x, int y) {
         super(name, shape, x, y);
@@ -38,7 +35,7 @@ class MyRock extends MyObject implements Drawable {
     }
 }
 
-class MyFish extends MyObject implements Movable, Drawable {
+class MyFish extends MyObject implements Movable{
     public MyFish(String name, String shape, int x, int y) {
         super(name, shape, x, y);
     }
@@ -87,6 +84,16 @@ public class Lake_If {
             return;
         movables[movables_num++] = m;
     }
+    public void addMoveDrawable(MoveDrawable md){
+        addDrawable(md);
+        addMovable(md);
+    }
+    public void addObject(MyObject obj){
+        if(obj instanceof Movable)
+            addMovable((Movable)obj);
+        if(obj instanceof Drawable)
+            addDrawable((Drawable)obj);
+    }
 
     public void moveFish() {
         for (int i = 0; i < movables_num; i++)
@@ -116,6 +123,7 @@ public class Lake_If {
         MyFish f = new MyFish("FIsh", "<#--<", 1, 1);
         lake.addDrawable(f);
         lake.addMovable(f);
+        lake.addMoveDrawable(f);
         lake.addDrawable(new MyRock("Rock", "(##)", 10, 10));
 
         Scanner scanner = new Scanner(System.in);
