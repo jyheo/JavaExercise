@@ -1,17 +1,11 @@
-package gui;
-
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Created by jyheo on 2016-05-17.
- */
-
 abstract class MyObject extends JButton {
     protected String name;
     protected String shape;
-    protected int x, y;
+
     public MyObject(String name, String shape, int x, int y) {
         super(shape);
         setLocation(x, y);
@@ -19,8 +13,7 @@ abstract class MyObject extends JButton {
         setVisible(true);
         this.name = name;
         this.shape = shape;
-        this.x = x;
-        this.y = y;
+
     }
 
     public void new_move(int width, int height) {};
@@ -34,19 +27,21 @@ class MyRock extends MyObject {
 
 class MyFish extends MyObject {
     private int velocity_x = 10;
+    private int velocity_y = 10;
 
     public MyFish(String name, String shape, int x, int y) {
         super(name, shape, x, y);
     }
 
     public void new_move(int width, int height) {
-        // getX(), getY()
+        int x =getX();
+        int y =getY();
 
         double rand = Math.random();
         if (rand < 0.5)
             x += velocity_x;
         else
-            y += 5;
+            y += velocity_y;
         if (x + getWidth() >= width) {
             x = width - getWidth();
             velocity_x = -velocity_x;
@@ -54,15 +49,20 @@ class MyFish extends MyObject {
             x = 0;
             velocity_x = -velocity_x;
         }
-        if (y >= height)
+        if (y + getHeight() >= height) {
+            y = height - getHeight();
+            velocity_y = -velocity_y;
+        } else if (y <= 0) {
             y = 0;
+            velocity_y = -velocity_y;
+        }
         setLocation(x, y);
     }
 }
 
 public class Lake_GUI extends JFrame {
-    private int width;
-    private int height;
+    //private int width;
+    //private int height;
     private ArrayList<MyObject> objects = new ArrayList<>();
 
     public Lake_GUI(int width, int height) {
@@ -72,8 +72,8 @@ public class Lake_GUI extends JFrame {
         setSize(width, height);
         setVisible(true);
 
-        this.width = width;
-        this.height = height;
+        //this.width = width;
+        //this.height = height;
     }
 
     public void addMyObject(MyObject obj) {
@@ -82,15 +82,20 @@ public class Lake_GUI extends JFrame {
     }
 
     public void moveObjects() {
+        int width = getContentPane().getWidth();
+        int height = getContentPane().getHeight();
+
         for (MyObject obj : objects) {
             obj.new_move(width, height);
         }
 
         // getContentPane().getWidth(), getHeight()
 
-        //for (Component c : getContentPane().getComponents()) {
-        //
-        //}
+        for (Component c : getContentPane().getComponents()) {
+            if(c instanceof MyObject){
+                ((MyObject)c).new_move(getWidth(), getHeight());
+            }
+        }
     }
 
     public static void main(String args[]) throws InterruptedException {
@@ -105,3 +110,4 @@ public class Lake_GUI extends JFrame {
         }
     }
 }
+
