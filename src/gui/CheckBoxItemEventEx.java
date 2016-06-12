@@ -1,17 +1,23 @@
-package gui;
-
-/**
- * 명품Java 예제 11-4
- * Modified by jyheo on 2016-05-29.
- */
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 public class CheckBoxItemEventEx extends JFrame {
-    String [] names = {"사과", "배", "체리"};
+    String [] names = {"사과", "배", "귤","오렌지","포도"};
     JCheckBox [] fruits = new JCheckBox [names.length];
+    ImageIcon[] images ={new ImageIcon("image/apple.jpg"),
+                          new ImageIcon("image/pear.jpg"),
+                          new ImageIcon("image/rnf.jpg"),
+                          new ImageIcon("image/orange.jpg"),
+                          new ImageIcon("image/grape.jpg")};
 
-    int[] prices = new int[] {100, 500, 20000};
+    int[] prices = new int[] {2000,5000,500,1000,3000};
+    JLabel[] la = {
+            new JLabel(),
+            new JLabel(),
+            new JLabel(),
+            new JLabel(),
+            new JLabel()
+    };
 
     JLabel sumLabel;
     int sum = 0;
@@ -39,8 +45,15 @@ public class CheckBoxItemEventEx extends JFrame {
         }
         sumLabel = new JLabel("현재 0 원 입니다.");
         contentPane.add(sumLabel);
-        setSize(250,200);
+        setSize(600,600);
         setVisible(true);
+
+        JPanel p = new JPanel();
+        contentPane.add(p);
+        p.setLayout(new GridLayout(1,5));
+        for(int i=0;i<fruits.length;i++){
+            p.add(la[i]);
+        }
     }
 
     class MyItemListener implements ItemListener {
@@ -64,4 +77,3 @@ public class CheckBoxItemEventEx extends JFrame {
         new CheckBoxItemEventEx();
     }
 }
-
